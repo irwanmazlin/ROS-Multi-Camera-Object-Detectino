@@ -120,59 +120,59 @@ include_directories(
 
 
 
-add_executable(object_detection
-  src/object_detection.cpp
-)
+# add_executable(object_detection
+#   src/object_detection.cpp
+# )
 
 add_executable(front
   src/front.cpp
 )
 
-add_executable(frontleft
-  src/frontleft.cpp
-)
+# add_executable(frontleft
+#   src/frontleft.cpp
+# )
 
-add_dependencies(object_detection ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(object_detection ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 add_dependencies(front ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_dependencies(frontleft ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(frontleft ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
 
-target_link_libraries(object_detection
-  ${catkin_LIBRARIES}
-  ${InferenceEngine_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-)
+# target_link_libraries(object_detection
+#   ${catkin_LIBRARIES}
+#   ${InferenceEngine_LIBRARIES}
+#   ${OpenCV_LIBRARIES}
+# )
 target_link_libraries(front
   ${catkin_LIBRARIES}
   ${InferenceEngine_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
 
-target_link_libraries(frontleft
-  ${catkin_LIBRARIES}
-  ${InferenceEngine_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-)
+# target_link_libraries(frontleft
+#   ${catkin_LIBRARIES}
+#   ${InferenceEngine_LIBRARIES}
+#   ${OpenCV_LIBRARIES}
+# )
 
-install(TARGETS object_detection
-    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(TARGETS object_detection
+#     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 install(TARGETS front
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-install(TARGETS frontleft
-    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(TARGETS frontleft
+#     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 
 install(DIRECTORY launch/
