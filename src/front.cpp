@@ -185,7 +185,7 @@ int main(int argc, char **argv){
             ROS_INFO("Model Network: %s", network_path.c_str());
         }
         else{
-            network_path="/opt/intel/computer_vision_sdk/deployment_tools/model_downloader/object_detection/common/mobilenet-ssd/caffe/mobilenet-ssd.xml";
+            network_path="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.xml";
             ROS_INFO("[Default] Model Network: %s", network_path.c_str());
         }
 
@@ -194,7 +194,7 @@ int main(int argc, char **argv){
             ROS_INFO("Model Weights: %s", weights_path.c_str());
         }
         else{
-            weights_path="/opt/intel/computer_vision_sdk/deployment_tools/model_downloader/object_detection/common/mobilenet-ssd/caffe/mobilenet-ssd.bin";
+            weights_path="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.bin";
             ROS_INFO("[Default] Model Weights: %s", weights_path.c_str());
         }
 
@@ -203,7 +203,7 @@ int main(int argc, char **argv){
             ROS_INFO("Model Labels: %s", labels_path.c_str());
         }
         else{
-            labels_path="/opt/intel/computer_vision_sdk/deployment_tools/model_downloader/object_detection/common/mobilenet-ssd/caffe/mobilenet-ssd.labels";
+            labels_path="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/mobilenet-ssd.labels";
             ROS_INFO("[Default] Model Labels: %s", labels_path.c_str());
         }
 
