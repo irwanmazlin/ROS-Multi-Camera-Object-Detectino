@@ -127,14 +127,14 @@ void depthCallback(const sensor_msgs::Image::ConstPtr& depth_msg){
 int main(int argc, char **argv){
     try{
         //Initialize Ros
-        ros::init(argc, argv, "frontleft");
+        ros::init(argc, argv, "front");
         //Handle creation
         ros::NodeHandle n;
         
 
         //--------- ROS PARAMETERS ----------//
-        if (n.getParam("/frontleft/input_image",input_image)){
-            ROS_INFO("input image object: %s", input_image.c_str());
+        if (n.getParam("/front/input_image",input_image)){
+            ROS_INFO("input image front: %s", input_image.c_str());
         }
         else{
             input_image="/camera/colors/image_raw";
@@ -142,37 +142,37 @@ int main(int argc, char **argv){
         }
 
 
-        if (n.getParam("/frontleft/depth_input",depth_input)){
-            ROS_INFO("input depth object: %s", depth_input.c_str());
+        if (n.getParam("/front/depth_input",depth_input)){
+            ROS_INFO("input depth front: %s", depth_input.c_str());
         }
         else{
-            depth_input="/camera/aligned_depth_to_color/image_raw";
+            depth_input="/camera1/aligned_depth_to_color/image_raw";
             ROS_INFO("[Default] depth topics: %s", depth_input.c_str());
         }
 
-        if (n.getParam("/frontleft/info_camera",info_camera)){
-            ROS_INFO("input info camera object: %s", info_camera.c_str());
+        if (n.getParam("/front/info_camera",info_camera)){
+            ROS_INFO("input info camera front: %s", info_camera.c_str());
         }
         else{
-            info_camera="/camera/aligned_depth_to_color/camera_info";
-            ROS_INFO("[Default] info camera object: %s", info_camera.c_str());
+            info_camera="/camera1/aligned_depth_to_color/camera_info";
+            ROS_INFO("[Default] info camera front: %s", info_camera.c_str());
         }
 
 
 
 
         //target device, by default is MYRIAD due ai core as mainly supported device
-        if (n.getParam("/frontleft/target",device)){
+        if (n.getParam("/front/target",device)){
             ROS_INFO("Target: %s", device.c_str());
         }  
         else{
-            device="CPU";
+            device="MYRIAD";
             ROS_INFO("[Default] Target: %s", device.c_str());
         }
         
         //threshold for confidence
-        if (n.getParam("/frontleft/threshold", confidence_threshold)){
-            ROS_INFO("Confidence Threshold object: %f", confidence_threshold);
+        if (n.getParam("/front/threshold", confidence_threshold)){
+            ROS_INFO("Confidence Threshold: %f", confidence_threshold);
             
         }  
         else{
@@ -181,7 +181,7 @@ int main(int argc, char **argv){
         }
 
         //network-> model.xml
-        if (n.getParam("/frontleft/model_network",network_path)){
+        if (n.getParam("/front/model_network",network_path)){
             ROS_INFO("Model Network: %s", network_path.c_str());
         }
         else{
@@ -190,7 +190,7 @@ int main(int argc, char **argv){
         }
 
         //weight -> model.bin
-        if (n.getParam("/frontleft/model_weights", weights_path)){
+        if (n.getParam("/front/model_weights", weights_path)){
             ROS_INFO("Model Weights: %s", weights_path.c_str());
         }
         else{
@@ -199,7 +199,7 @@ int main(int argc, char **argv){
         }
 
         //labels -> model.labels
-        if (n.getParam("/frontleft/model_labels", labels_path)){
+        if (n.getParam("/fron/model_labels", labels_path)){
             ROS_INFO("Model Labels: %s", labels_path.c_str());
         }
         else{
@@ -208,7 +208,7 @@ int main(int argc, char **argv){
         }
 
         //labels -> model.labels
-        if (n.getParam("/frontleft/model_colors", colors_path)){
+        if (n.getParam("/front/model_colors", colors_path)){
             ROS_INFO("Model Colors: %s", colors_path.c_str());
         }
         else{
@@ -217,7 +217,7 @@ int main(int argc, char **argv){
         }
 
         //check if frame publisher is wanted
-        if (n.getParam("/frontleft/output_as_image", output_as_image)){
+        if (n.getParam("/front/output_as_image", output_as_image)){
             ROS_INFO("Publish Analyzed Image Topic: %s", output_as_image ? "true" : "false");
         }
         else{
@@ -226,7 +226,7 @@ int main(int argc, char **argv){
         }
 
         //check if results list publisher is wanted
-        if (n.getParam("/frontleft/output_as_list", output_as_list)){
+        if (n.getParam("/front/output_as_list", output_as_list)){
             ROS_INFO("Publish Results List: %s", output_as_list ? "true" : "false");
         }
         else{
@@ -235,7 +235,7 @@ int main(int argc, char **argv){
         }
 
         //frame id used as TF reference
-        if (n.getParam("/frontleft/frame_id", depth_frameid)){
+        if (n.getParam("/front/frame_id", depth_frameid)){
             ROS_INFO("Frame id used: %s", depth_frameid.c_str());
         }
         else{
@@ -245,7 +245,7 @@ int main(int argc, char **argv){
 
 
         //check if depth analysis is wanted
-        if (n.getParam("/frontleft/depth_analysis", depth_analysis)){
+        if (n.getParam("/front/depth_analysis", depth_analysis)){
             ROS_INFO("Depth Analysis: %s", depth_analysis ? "ENABLED" : "DISABLED");
         }
         else{
@@ -255,7 +255,7 @@ int main(int argc, char **argv){
 
         if (depth_analysis){
             //check if markers are wanted
-            if (n.getParam("/frontleft/output_as_markers", output_markers)){
+            if (n.getParam("/front/output_as_markers", output_markers)){
                 ROS_INFO("Output Markers: %s", output_markers ? "true" : "false");
             }
             else{
@@ -264,7 +264,7 @@ int main(int argc, char **argv){
             }
 
             //check if markers label are wanted
-            if (n.getParam("/frontleft/output_as_markerslabel", output_markerslabel)){
+            if (n.getParam("/front/output_as_markerslabel", output_markerslabel)){
                 ROS_INFO("Output Markers Label: %s", output_markerslabel ? "true" : "false");
             }
             else{
@@ -274,7 +274,7 @@ int main(int argc, char **argv){
             
             if (output_markers||output_markerslabel){
                 //lifetime of markers
-                if (n.getParam("/frontleft/output_markers_lifetime", markerduration)){
+                if (n.getParam("/front/output_markers_lifetime", markerduration)){
                     ROS_INFO("Output Markers Lifetime: %f", markerduration);
                 }
                 else{
@@ -284,7 +284,7 @@ int main(int argc, char **argv){
             }
 
             //check if output as box list is wanted
-            if (n.getParam("/frontleft/output_as_box_list", output_boxlist)){
+            if (n.getParam("/front/output_as_box_list", output_boxlist)){
                 ROS_INFO("Output as Box List: %s", output_boxlist ? "true" : "false");
             }
             else{
@@ -296,32 +296,32 @@ int main(int argc, char **argv){
 
         
         //ROS subscribers
-        ros::Subscriber image_sub = n.subscribe(input_image,1,imageCallback);
+        ros::Subscriber image_sub = n.subscribe("/front/input_image",1,imageCallback);
         ros::Subscriber camerainfo_sub;
         ros::Subscriber depth_sub; 
         
         //ROS publishers
         ros::Publisher image_pub;
         if (output_as_image){
-            image_pub = n.advertise<sensor_msgs::Image>("/frontleft/output_image",1);
+            image_pub = n.advertise<sensor_msgs::Image>("/front/output_image",1);
         }
         
         ros::Publisher result_pub;
         if (output_as_list){
-            result_pub = n.advertise<detection::Objects>("/frontleft/results",1);
+            result_pub = n.advertise<detection::Objects>("/front/results",1);
         }
         
         //Depth analysis allow subscription and publishing
         ros::Publisher marker_pub;
         ros::Publisher boxlist_pub;
         if (depth_analysis){
-            depth_sub = n.subscribe(depth_input,1,depthCallback);
-            camerainfo_sub = n.subscribe(info_camera,1,infoCallback);
+            depth_sub = n.subscribe("/front/depth_input",1,depthCallback);
+            camerainfo_sub = n.subscribe("/front/info_camera",1,infoCallback);
             if (output_markers||output_markerslabel){
-                marker_pub = n.advertise<visualization_msgs::MarkerArray>("/frontleft/markers", 1);
+                marker_pub = n.advertise<visualization_msgs::MarkerArray>("/front/markers", 1);
             }
             if (output_boxlist){
-                boxlist_pub = n.advertise<detection::ObjectBoxList>("/frontleft/box_list", 1);
+                boxlist_pub = n.advertise<detection::ObjectBoxList>("/front/box_list", 1);
             }
         }
         

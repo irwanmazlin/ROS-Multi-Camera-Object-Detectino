@@ -1,0 +1,85 @@
+<!-- Irwan Mazlin -->
+<launch>
+<node name="front" pkg="detection" type="front" output="screen" >
+        <!-- <param name="input_image"         value="/camera1/color/image_raw" />
+        <param name="depth_input"         value="/camera1/aligned_depth_to_color/image_raw" />
+        <param name="info_camera"         value="/camera1/aligned_depth_to_color/camera_info" /> -->
+        <remap from="/front/info_camera" to="/camera1/aligned_depth_to_color/camera_info" />
+        <remap from="/front/depth_input" to="/camera1/aligned_depth_to_color/image_raw" />
+        <remap from="/front/input_image" to="/camera1/color/image_raw" />
+        <remap from="/front/output_image" to="/object_detection1/outputdetection" />
+        <remap from="/front/results" to="/object_detection1/resultlist" />
+        <remap from="/front/markers" to="/object_detection1/markers" />
+
+        <remap from="/front/box_list" to="/object_detection1/box_list" />
+        <!-- <remap from="/object_detection/frame_id" to="camera1_link" /> -->
+
+        <param name="frame_id"         value="camera1_link" />
+        <param name="threshold"         value="0.3" />
+        <param name="target"            value="CPU" />
+        <param name="model_network"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.xml" />
+        <param name="model_weights"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.bin" />
+        <param name="model_labels"      value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/mobilenet-ssd.labels" />
+        <param name="model_colors"      value="$(find detection)/models/FP16/mobilenet-ssd/mobilenet-ssd.colors" />
+        <param name="output_as_image"   value="true" />
+        <param name="output_as_list"    value="true" />
+        <param name="depth_analysis"    value="true" />
+        <param name="output_as_markers" value="true" />
+        <param name="output_as_makerslabel" value="true" />
+        <param name="output_as_boxlist" value="false" />
+    </node>
+
+
+    <node name="object_detection" pkg="detection" type="front" output="screen" >
+        <remap from="/front/info_camera" to="/camera2/aligned_depth_to_color/camera_info" />
+        <remap from="/front/depth_input" to="/camera2/aligned_depth_to_color/image_raw" />
+        <remap from="/front/input_image" to="/camera2/color/image_raw" />
+        <remap from="/front/output_image" to="/object_detection2/outputdetection" />
+        <remap from="/front/results" to="/object_detection2/resultlist" />
+        <remap from="/front/markers" to="/object_detection2/markers" />
+
+        <remap from="/front/box_list" to="/object_detection2/box_list" />
+        <!-- <remap from="/object_detection/frame_id" to="camera1_link" /> -->
+
+        <param name="frame_id"         value="camera2_link" />
+        <param name="threshold"         value="0.3" />
+        <param name="target"            value="CPU" />
+        <param name="model_network"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.xml" />
+        <param name="model_weights"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.bin" />
+        <param name="model_labels"      value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/mobilenet-ssd.labels" />
+        <param name="model_colors"      value="$(find detection)/models/FP16/mobilenet-ssd/mobilenet-ssd.colors" />
+        <param name="output_as_image"   value="true" />
+        <param name="output_as_list"    value="true" />
+        <param name="depth_analysis"    value="true" />
+        <param name="output_as_markers" value="true" />
+        <param name="output_as_makerslabel" value="true" />
+        <param name="output_as_boxlist" value="false" />
+    </node>
+
+    <node name="frontleft" pkg="detection" type="front" output="screen" >
+        <remap from="/front/info_camera" to="/camera3/aligned_depth_to_color/camera_info" />
+        <remap from="/front/depth_input" to="/camera3/aligned_depth_to_color/image_raw" />
+        <remap from="/front/input_image" to="/camera3/color/image_raw" />
+        <remap from="/front/output_image" to="/object_detection3/outputdetection" />
+        <remap from="/front/results" to="/object_detection3/resultlist" />
+        <remap from="/front/markers" to="/object_detection3/markers" />
+
+        <remap from="/front/box_list" to="/object_detection3/box_list" />
+        <!-- <remap from="/object_detection/frame_id" to="camera1_link" /> -->
+
+        <param name="frame_id"         value="camera3_link" />
+        <param name="threshold"         value="0.3" />
+        <param name="target"            value="CPU" />
+        <param name="model_network"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.xml" />
+        <param name="model_weights"     value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/saved_model.bin" />
+        <param name="model_labels"      value="/home/mlv/catkin_ws/src/ROS-Multi-Camera-Object-Detectino/models/FP16/mobilenet-ssd/mobilenet-ssd.labels" />
+        <param name="model_colors"      value="$(find detection)/models/FP16/mobilenet-ssd/mobilenet-ssd.colors" />
+        <param name="output_as_image"   value="true" />
+        <param name="output_as_list"    value="true" />
+        <param name="depth_analysis"    value="true" />
+        <param name="output_as_markers" value="true" />
+        <param name="output_as_makerslabel" value="true" />
+        <param name="output_as_boxlist" value="false" />
+    </node>
+
+</launch>
