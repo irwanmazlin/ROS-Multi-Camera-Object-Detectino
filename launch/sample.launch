@@ -1,6 +1,22 @@
 <!-- Irwan Mazlin -->
 <launch>
 
+    
+
+    
+
+
+    
+
+
+
+
+    
+
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find detection)/rviz/final.rviz" />
+
+
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/mk_one.xacro'"/>
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
@@ -8,10 +24,10 @@
     <include file="$(find realsense2_camera)/launch/rs_multiple_devices.launch">
         <!-- <arg name="align_depth" value="true"/> -->
     </include>
+    
+   
 
    
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find detection)/rviz/final.rviz" />
-
+   
 
 </launch>
-
